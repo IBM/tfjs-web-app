@@ -1,0 +1,7 @@
+---
+applications:
+ - name: eco-classify
+   memory: 512M
+   routes:
+   - route: eco-classify.mybluemix.net
+   command: npm run start-prod

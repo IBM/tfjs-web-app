@@ -1,0 +1,108 @@
+.Classify {
+  margin-top: 20px;
+}
+
+.Classify .imagefile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.Classify .imagelabel {
+  font-size: 16px;
+  color: #555;
+  font-weight: 500;
+  height: 34px;
+  padding: 6px 12px;
+  background-color: #fff;
+  display: inline-block;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 0px;
+}
+
+.Classify .tab-pane {
+  padding-top: 40px;
+}
+
+.Classify #no-webcam {
+  display: none;
+  text-align: center;
+  font-size: 22px;
+  padding: 10px;
+  line-height: 30px;
+}
+.Classify #no-webcam .camera-icon {
+  font-size: 40px;
+  display: block;
+  padding-bottom: 24px;
+}
+
+.Classify .webcam-box-outer {
+  background: #49494b;
+  border: 1px solid #585858;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: inline-block;
+  padding: 5px;
+}
+
+.Classify .webcam-box-inner {
+  border: 1px solid #585858;
+  border-radius: 4px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  width: 280px;
+}
+
+
+.Classify #webcam {
+  height: 280px;
+}
+
+.Classify .button-container {
+  margin-top: 18px;
+}
+
+.Classify .classify-panel-header {
+  margin-top: 10px;
+  width: 100%;
+  background-color: rgba(0,0,0,.03);;
+  color: #585858;
+  border-color: rgba(0,0,0,.125);;
+}
+
+.Classify .classify-panel-header:hover {
+  background-color: rgba(0,0,0,.1);;
+  color: #585858;
+}
+
+.Classify .classify-panel-header:active {
+  background-color: #585858 !important;
+  color: #fff !important;
+}
+
+.Classify #photo-selection-pane {
+  padding: 12px;
+  background: #fcfcfc;
+}
+
+.Classify .panel-arrow {
+  float: right;
+}
+
+.Classify .classification-results {
+  margin-top: 18px;
+}
+
+.Classify .loading-model-text {
+  padding-left: 12px;
+  font-size: 36px;
+  font-weight: 600;
+}
