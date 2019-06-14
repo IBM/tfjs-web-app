@@ -19,6 +19,9 @@ In the project directory, run:
 In the `public` folder, you will see a model folder. The TensorFlow.js model files need to go there
 (i.e. the `model.json` and `*.bin` files).
 
+In `src/model`, there is a `classes.js` file which lists the possible classes that the model can classify
+for. Alter this to fit your model.
+
 If deploying the application, change the `API_ENDPOINT` in `src/config.js` to the proper endpoint.
 For development, leave it as is.
 
