@@ -44,7 +44,7 @@ export default class Classify extends Component {
   }
 
   async componentDidMount() {
-
+    console.log('mounting...');
     if (('indexedDB' in window)) {
       try {
         this.model = await tf.loadLayersModel('indexeddb://' + INDEXEDDB_KEY);
@@ -81,8 +81,7 @@ export default class Classify extends Component {
         console.log('Not found in IndexedDB. Loading and saving...');
         console.log(error);
         this.model = await tf.loadLayersModel(MODEL_PATH);
-        const saveResults = await this.model.save('indexeddb://' + INDEXEDDB_KEY);
-        console.log(saveResults);
+        await this.model.save('indexeddb://' + INDEXEDDB_KEY);
       }
     }
     // If no IndexedDB, then just download like normal.
@@ -96,6 +95,12 @@ export default class Classify extends Component {
 
     // Warm up model.
     this.model.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])).dispose();
+  }
+
+  async componentWillUnmount() {
+    if (this.webcam) {
+      this.webcam.stop();
+    }
   }
 
   initWebcam = async () => {
@@ -161,7 +166,12 @@ export default class Classify extends Component {
 
     // Draw thumbnail to UI.
     const context = this.refs.canvas.getContext("2d");
-    context.drawImage(croppedCanvas, 0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    const ratioX = CANVAS_SIZE / croppedCanvas.width;
+    const ratioY = CANVAS_SIZE / croppedCanvas.height;
+    const ratio = Math.min(ratioX, ratioY);
+    context.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+    context.drawImage(croppedCanvas, 0, 0,
+                      croppedCanvas.width * ratio, croppedCanvas.height * ratio)
 
     // Dispose of tensors we are finished with.
     image.dispose();
@@ -235,13 +245,12 @@ export default class Classify extends Component {
   }
 
   handleFileChange = event => {
-    if (!event.target.files || event.target.files.length < 0) {
-      return
+    if (event.target.files && event.target.files.length > 0) {
+      this.setState({
+        file: URL.createObjectURL(event.target.files[0]),
+        filename: event.target.files[0].name
+      });
     }
-    this.setState({
-      file: URL.createObjectURL(event.target.files[0]),
-      filename: event.target.files[0].name
-    });
   }
 
   handleTabSelect = activeKey => {
@@ -258,7 +267,7 @@ export default class Classify extends Component {
 
   render() {
     return (
-      <div className="Classify">
+      <div className="Classify container">
 
       { !this.state.modelLoaded &&
         <Fragment>
@@ -287,7 +296,8 @@ export default class Classify extends Component {
           </Button>
           <Collapse in={this.state.photoSettingsOpen}>
             <div id="photo-selection-pane">
-            <Tabs defaultActiveKey="camera" id="input-options" onSelect={this.handleTabSelect} className="justify-content-center">
+            <Tabs defaultActiveKey="camera" id="input-options" onSelect={this.handleTabSelect}
+                  className="justify-content-center">
               <Tab eventKey="camera" title="Take Photo">
                 <div id="no-webcam" ref="noWebcam">
                   <span className="camera-icon"><FaCamera /></span>
@@ -296,7 +306,9 @@ export default class Classify extends Component {
                 </div>
                 <div className="webcam-box-outer">
                   <div className="webcam-box-inner">
-                    <video ref="webcam" autoPlay playsInline muted id="webcam" width="448" height="448"></video>
+                    <video ref="webcam" autoPlay playsInline muted id="webcam"
+                           width="448" height="448">
+                    </video>
                   </div>
                 </div>
                 <div className="button-container">
@@ -312,7 +324,7 @@ export default class Classify extends Component {
               </Tab>
               <Tab eventKey="localfile" title="Select Local File">
                 <Form.Group controlId="file">
-                  <Form.Label>Upload Image File</Form.Label><br />
+                  <Form.Label>Select Image File</Form.Label><br />
                   <Form.Label className="imagelabel">
                     {this.state.filename ? this.state.filename : 'Browse...'}
                   </Form.Label>
@@ -329,9 +341,9 @@ export default class Classify extends Component {
                         ref="cropper"
                         src={this.state.file}
                         style={{height: 400, width: "100%"}}
-                        aspectRatio={1 / 1}
                         guides={true}
-                        viewMode = {2} />
+                        viewMode={2}
+                      />
                     </div>
                     <div className="button-container">
                       <LoadButton
