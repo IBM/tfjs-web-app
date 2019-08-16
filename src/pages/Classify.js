@@ -18,7 +18,7 @@ const TOPK_PREDICTIONS = 5;
 
 const INDEXEDDB_DB = 'tensorflowjs';
 const INDEXEDDB_STORE = 'model_info_store'
-const INDEXEDDB_KEY = 'eco-model';
+const INDEXEDDB_KEY = 'web-model';
 
 /**
  * Class to handle the rendering of the Classify page.
@@ -50,7 +50,6 @@ export default class Classify extends Component {
 
         // Safe to assume tensorflowjs database and related object store exists.
         // Get the date when the model was saved.
-        // TODO: Compare it with the date the model was last updated on the server.
         try {
           const db = await openDB(INDEXEDDB_DB, 1, );
           const item = await db.transaction(INDEXEDDB_STORE).objectStore(INDEXEDDB_STORE).get(INDEXEDDB_KEY);
@@ -93,13 +92,20 @@ export default class Classify extends Component {
     this.initWebcam();
 
     // Warm up model.
-    this.model.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])).dispose();
+    let prediction = tf.tidy(() => this.model.predict(tf.zeros([1, IMAGE_SIZE, IMAGE_SIZE, 3])));
+    prediction.dispose();
   }
 
   async componentWillUnmount() {
     if (this.webcam) {
       this.webcam.stop();
     }
+
+    // Attempt to dispose of the model.
+    try {
+      this.model.dispose();
+    }
+    catch (e) {}
   }
 
   initWebcam = async () => {
@@ -147,7 +153,7 @@ export default class Classify extends Component {
     this.setState({ isClassifying: true });
 
     const croppedCanvas = this.refs.cropper.getCroppedCanvas();
-    const image = tf.browser.fromPixels(croppedCanvas).toFloat();
+    const image = tf.tidy( () => tf.browser.fromPixels(croppedCanvas).toFloat());
 
     // Process and resize image before passing in to model.
     const imageData = await this.processImage(image);
@@ -176,6 +182,7 @@ export default class Classify extends Component {
     image.dispose();
     imageData.dispose();
     resizedImage.dispose();
+    logits.dispose();
   }
 
   classifyWebcamImage = async () => {
@@ -196,12 +203,15 @@ export default class Classify extends Component {
 
     // Draw thumbnail to UI.
     const resized = tf.image.resizeBilinear(imageCapture, [CANVAS_SIZE, CANVAS_SIZE]);
-    await tf.browser.toPixels(resized.toFloat().div(255), this.refs.canvas);
+    const tensorData = tf.tidy(() => resized.toFloat().div(255));
+    await tf.browser.toPixels(tensorData, this.refs.canvas);
 
     // Dispose of tensors we are finished with.
     resized.dispose();
     imageCapture.dispose();
     imageData.dispose();
+    logits.dispose();
+    tensorData.dispose();
   }
 
   processImage = async (image) => {
