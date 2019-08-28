@@ -16,7 +16,7 @@ class Index extends Component {
   componentDidMount() {
     const config = {
       onUpdate: this.handleUpdate,
-    }
+    };
 
     // If you want your app to work offline and load faster, you can change
     // unregister() to register() below. Note this comes with some pitfalls.
@@ -33,10 +33,10 @@ class Index extends Component {
   }
 
   handleUpdate = (registration) => {
-    const waitingServiceWorker = registration.waiting
+    const waitingServiceWorker = registration.waiting;
 
     if (waitingServiceWorker) {
-      waitingServiceWorker.postMessage({ type: "SKIP_WAITING" });
+      waitingServiceWorker.postMessage({ type: 'SKIP_WAITING' });
     }
     this.setState({ updateAvailable: true});
   }

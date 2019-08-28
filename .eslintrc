@@ -1,0 +1,21 @@
+{
+  "plugins": [
+    "react"
+  ],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "extends": [
+    "eslint:recommended",
+    "react-app"
+  ],
+  "rules": {
+    "semi": 2,
+    "no-trailing-spaces": 2,
+    "max-len": ["error", { "code": 100 }],
+    "no-console": 1,
+    "quotes": ["error", "single"]
+  }
+}

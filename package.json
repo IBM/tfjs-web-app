@@ -1,7 +1,8 @@
 {
-  "name": "eco-web-app",
+  "name": "tfjs-web-app",
   "version": "0.1.0",
   "private": true,
+  "license": "Apache-2.0",
   "dependencies": {
     "@tensorflow/tfjs": "^1.1.2",
     "bootstrap": "^4.3.1",
@@ -23,7 +24,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start-prod": "node server.js"
+    "start-prod": "node server.js",
+    "lint": "eslint ./src"
   },
   "eslintConfig": {
     "extends": "react-app"

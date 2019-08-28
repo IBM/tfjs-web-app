@@ -17,7 +17,7 @@ const CANVAS_SIZE = 128;
 const TOPK_PREDICTIONS = 5;
 
 const INDEXEDDB_DB = 'tensorflowjs';
-const INDEXEDDB_STORE = 'model_info_store'
+const INDEXEDDB_STORE = 'model_info_store';
 const INDEXEDDB_KEY = 'web-model';
 
 /**
@@ -52,7 +52,9 @@ export default class Classify extends Component {
         // Get the date when the model was saved.
         try {
           const db = await openDB(INDEXEDDB_DB, 1, );
-          const item = await db.transaction(INDEXEDDB_STORE).objectStore(INDEXEDDB_STORE).get(INDEXEDDB_KEY);
+          const item = await db.transaction(INDEXEDDB_STORE)
+                               .objectStore(INDEXEDDB_STORE)
+                               .get(INDEXEDDB_KEY);
           const dateSaved = new Date(item.modelArtifactsInfo.dateSaved);
           await this.getModelInfo();
           console.log(this.modelLastUpdated);
@@ -69,7 +71,7 @@ export default class Classify extends Component {
         }
         catch (error) {
           console.warn(error);
-          console.warn('Could not retrieve when model was saved.')
+          console.warn('Could not retrieve when model was saved.');
         }
 
       }
@@ -105,7 +107,9 @@ export default class Classify extends Component {
     try {
       this.model.dispose();
     }
-    catch (e) {}
+    catch (e) {
+      // Assume model is not loaded or already disposed.
+    }
   }
 
   initWebcam = async () => {
@@ -170,13 +174,13 @@ export default class Classify extends Component {
     });
 
     // Draw thumbnail to UI.
-    const context = this.refs.canvas.getContext("2d");
+    const context = this.refs.canvas.getContext('2d');
     const ratioX = CANVAS_SIZE / croppedCanvas.width;
     const ratioY = CANVAS_SIZE / croppedCanvas.height;
     const ratio = Math.min(ratioX, ratioY);
     context.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
     context.drawImage(croppedCanvas, 0, 0,
-                      croppedCanvas.width * ratio, croppedCanvas.height * ratio)
+                      croppedCanvas.width * ratio, croppedCanvas.height * ratio);
 
     // Dispose of tensors we are finished with.
     image.dispose();
@@ -244,7 +248,7 @@ export default class Classify extends Component {
       topClassesAndProbs.push({
         className: MODEL_CLASSES[topkIndices[i]],
         probability: (topkValues[i] * 100).toFixed(2)
-      })
+      });
     }
     return topClassesAndProbs;
   }
@@ -349,7 +353,7 @@ export default class Classify extends Component {
                       <Cropper
                         ref="cropper"
                         src={this.state.file}
-                        style={{height: 400, width: "100%"}}
+                        style={{height: 400, width: '100%'}}
                         guides={true}
                         viewMode={2}
                       />
