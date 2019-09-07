@@ -43,24 +43,18 @@
 }
 
 .Classify .webcam-box-outer {
-  background: #49494b;
-  border: 1px solid #585858;
-  border-radius: 4px;
   box-sizing: border-box;
   display: inline-block;
-  padding: 5px;
 }
 
 .Classify .webcam-box-inner {
   border: 1px solid #585858;
-  border-radius: 4px;
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   overflow: hidden;
   width: 280px;
 }
-
 
 .Classify #webcam {
   height: 280px;
@@ -91,6 +85,8 @@
 .Classify #photo-selection-pane {
   padding: 12px;
   background: #fcfcfc;
+  padding-top: 12px;
+  padding-bottom: 12px;
 }
 
 .Classify .panel-arrow {
