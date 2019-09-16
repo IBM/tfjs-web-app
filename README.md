@@ -241,6 +241,10 @@ locally stored model is before this date, a prompt is given to user with the opt
 The user can choose to dismiss the update, or if the API call fails, then the locally saved model will
 continue to be used.
 
+#### Deploy on IBM Cloud
+
+Deployment of the production app on the IBM Cloud is easy. Instructions can be found [here](doc/cloud-deploy.md).
+
 ## Links
 
 * [TensorFlow.js](https://www.tensorflow.org/js)
