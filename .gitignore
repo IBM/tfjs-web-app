@@ -62,7 +62,7 @@ typings/
 
 # model files
 public/model/model.json
-public/model/*.bin
+public/model/*shard*
 
 .DS_Store
 dist/

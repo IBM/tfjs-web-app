@@ -4,7 +4,7 @@
   "private": true,
   "license": "Apache-2.0",
   "dependencies": {
-    "@tensorflow/tfjs": "^1.1.2",
+    "@tensorflow/tfjs": "^1.2.7",
     "bootstrap": "^4.3.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",

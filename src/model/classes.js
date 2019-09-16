@@ -1,4 +1,6 @@
+/* eslint-disable */
 // Theses classes should correspond to the softmax output of your model.
+
 export const MODEL_CLASSES = {
   0: 'tench, Tinca tinca',
   1: 'goldfish, Carassius auratus',

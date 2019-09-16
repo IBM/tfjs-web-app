@@ -14,8 +14,8 @@ import 'cropperjs/dist/cropper.css';
 
 
 const MODEL_PATH = '/model/model.json';
-const IMAGE_SIZE = 64;
-const CANVAS_SIZE = 128;
+const IMAGE_SIZE = 224;
+const CANVAS_SIZE = 224;
 const TOPK_PREDICTIONS = 5;
 
 const INDEXEDDB_DB = 'tensorflowjs';
@@ -412,6 +412,7 @@ export default class Classify extends Component {
                         src={this.state.file}
                         style={{height: 400, width: '100%'}}
                         guides={true}
+                        aspectRatio={1 / 1}
                         viewMode={2}
                       />
                     </div>

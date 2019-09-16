@@ -1,4 +1,4 @@
-# Create a progressive web application for TensorFlow image classification
+# Create a progressive web application for offline image classification
 
 After creating deep learning models, users typically want to deploy their trained models to be used
 in their applications. There are several ways to do this, and how users do it depends largely on
@@ -122,17 +122,15 @@ yarn install
 
 ### 3. Download and convert pre-trained model
 
-For this pattern, we are going to download a TensorFlow MobileNet model. However, any image
+For this pattern, we are going to download a MobileNet model. However, any image
 classification model can be used including any custom made ones. You just have to be able to
 convert it with `tfjs-converter`.
 
 The `tfjs-converter` library can convert models that are in formats such as TensorFlow SavedModel and Keras
-HDF5, and it can also convert modules straight from [TensorFlow Hub](https://www.tensorflow.org/hub).
-More information about converting Python models to a web-friendly format can be found
+HDF5. More information about converting Python models to a web-friendly format can be found
 in the `tfjs-converter` [repository](https://github.com/tensorflow/tfjs/tree/master/tfjs-converter).
 
-Here, we will use a model from TensorFlow Hub, so let's first get our environment set up to use
-the `tensorflowjs` Python package.
+Now, let's get our environment set up to use the `tensorflowjs` Python package.
 
 The general recommendation for Python development is to use a virtual environment
 [(venv)](https://docs.python.org/3/tutorial/venv.html). To install and initialize a virtual environment,
@@ -156,16 +154,20 @@ Install the `tensorflowjs` package.
 pip install tensorflowjs
 ```
 
-Now let's get the MobileNet model and convert it:
+Now let's download the Keras MobileNet model. A simple script has been provided to make sure
+that MobileNet is downloaded in the proper HDF5 format. Just run:
 ```bash
-tensorflowjs_converter \
-    --input_format=tf_hub \
-    'https://tfhub.dev/google/imagenet/mobilenet_v1_100_224/classification/3' \
-    ./my-model
+python download_model.py
 ```
 
-We now have a `model.json` file and multiple `.bin` files that we will use in our web app.
+After this is complete, the current directory should now contain `mobilenet-model.h5`. Let's convert
+it so it can be used in our app:
+```bash
+tensorflowjs_converter --input_format=keras ./mobilenet_1_0_224_tf.h5 ./my-model
+```
 
+We now have a `model.json` file and multiple sharded binary files located in `./my-model` that we
+will use in our web app.
 
 ### 4. Setup configuration files
 
