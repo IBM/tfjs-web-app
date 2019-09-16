@@ -171,8 +171,8 @@ will use in our web app.
 
 ### 4. Setup configuration files
 
-In the `public` folder, you will see a model folder. The TensorFlow.js model files need to go there
-(i.e. the `model.json` and `*.bin` files). If not already there, let's move them:
+In the `public` folder, you will see a `model` folder. The TensorFlow.js model files need to go there
+(i.e. the `model.json` and `*shard*` files). If not already there, let's move them:
 ```bash
 mv ./my-model/* ./public/model/
 ```
