@@ -12,7 +12,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     const reloadMsg = `
-      New content is available. Please <a href='javascript:location.reload();'>reload</a><br />.
+      New content is available.<br />
+      Please <a href='javascript:location.reload();'>reload</a>.<br />
       <small>If reloading doesn't work, close all tabs/windows of this web application,
       and then reopen the application.</small>
     `;
