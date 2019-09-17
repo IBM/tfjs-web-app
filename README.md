@@ -245,6 +245,15 @@ continue to be used.
 
 Deployment of the production app on the IBM Cloud is easy. Instructions can be found [here](doc/cloud-deploy.md).
 
+#### Using the App
+
+The app allows you to either use your device's camera to snap an image or select a local image from
+the device's filesystem. Select an image of an object or put the object in frame using your camera,
+then click classify. Local inference will then be performed, and the top five results will be given.
+
+![Classify with App](doc/images/app-classify.png "Classify with App")
+![App Predictions](doc/images/app-predictions.png "App Predictions")
+
 ## Links
 
 * [TensorFlow.js](https://www.tensorflow.org/js)
