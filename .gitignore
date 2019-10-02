@@ -67,3 +67,5 @@ public/model/*shard*
 .DS_Store
 dist/
 build/
+*.h5
+my-model/

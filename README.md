@@ -26,14 +26,17 @@ pre-trained model converted to the TensorFlow.js format to provide the inference
 This model is saved locally in the browser using IndexedDB, and a service worker is used to
 provide offline capabilities.
 
+![architecture](doc/images/arch-diagram.png)
+
 ## Flow
 
-1. A Pre-trained Keras/TensorFlow model is converted to TensorFlow.js and integrated with app.
+1. A pre-trained Keras/TensorFlow model is converted to the TensorFlow.js web friendly format and
+   integrated with app.
 2. User launches progressive web application.
-3. App assets and TensorFlow.js model are downloaded and stored locally using browser cache and
-   storage.
-4. User takes photo with device camera or selects local image.
-5. Image is sent through the model for inference and top predictions are given.
+3. App assets and TensorFlow.js model files are downloaded from the web.
+4. Assets and model are stored locally using browser cache and IndexedDB storage.
+5. User takes photo with device camera or selects local image.
+6. Image is sent through the model for inference and top predictions are given.
 
 
 ## Included Components
