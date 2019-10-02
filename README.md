@@ -20,7 +20,7 @@ PWAs can provide fully offline functionality.
 With [TensorFlow.js](https://www.tensorflow.org/js), we can convert our pre-trained TensorFlow or
 Keras models into JavaScript to be run in the browser through the app!
 
-In then end we will have a cross-platform application where users can classify
+In then end, we will have a cross-platform application where users can classify
 images selected locally or taken with their device's camera. The app uses TensorFlow.js and a
 pre-trained model converted to the TensorFlow.js format to provide the inference capabilities.
 This model is saved locally in the browser using IndexedDB, and a service worker is used to
@@ -28,10 +28,11 @@ provide offline capabilities.
 
 ## Flow
 
-1. A Pre-trained TensorFlow model is converted to TensorFlow.js.
+1. A Pre-trained Keras/TensorFlow model is converted to TensorFlow.js and integrated with app.
 2. User launches progressive web application.
-3. App assets and TensorFlow.js model are downloaded and stored locally.
-4. User takes photo with device camera or selects local image
+3. App assets and TensorFlow.js model are downloaded and stored locally using browser cache and
+   storage.
+4. User takes photo with device camera or selects local image.
 5. Image is sent through the model for inference and top predictions are given.
 
 
@@ -67,7 +68,7 @@ the pre-trained model is downloaded and saved in [IndexedDB](https://developer.m
 a browser API for client-side storage. Subsequent loads to the page will retrieve the model from IndexedDB if
 it is available. This saves from having to continually re-download the model.
 
-**App can run on desktop and 'installed' on mobile**<br />
+**App can run on desktop and be 'installed' on mobile**<br />
 Regardless of what platform the user is on, as long as the app is run on a modern browser, everything
 should work. With the use of our [manifest file](https://developers.google.com/web/fundamentals/web-app-manifest/),
 the app can be 'installed' on mobile devices, making it look like a native app with its own app icon
@@ -83,7 +84,7 @@ the server, the user is given a prompt with the option to update.
 
 ## Watch the Video
 
-Video coming soon!
+[![](https://img.youtube.com/vi/DmlI0Dlr6iQ/0.jpg)](https://youtu.be/DmlI0Dlr6iQ)
 
 ## Steps
 

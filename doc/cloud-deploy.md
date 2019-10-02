@@ -4,6 +4,8 @@ These are instructions for a quick deployment of the web app on IBM Cloud.
 
 ## Prerequisites
 
+* An IBM Cloud account. If you do not have one, you can register for
+  free [here](https://cloud.ibm.com/registration):
 * Ensure that the [IBM Cloud CLI](https://cloud.ibm.com/docs/cli/index.html)
   tool is installed locally. Follow the instructions in the linked documentation to
   configure your environment.

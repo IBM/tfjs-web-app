@@ -2,6 +2,7 @@
 applications:
  - name: web-classify
    memory: 512M
+   disk_quota: 2048M
    routes:
    - route: [UPDATE-ME].mybluemix.net
    command: npm run start-prod

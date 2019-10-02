@@ -6,3 +6,6 @@ README.md
 .gitignore
 logs
 *.log
+doc/
+*.h5
+my-model/
