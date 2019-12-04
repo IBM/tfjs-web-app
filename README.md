@@ -167,7 +167,7 @@ python download_model.py
 After this is complete, the current directory should now contain `mobilenet-model.h5`. Let's convert
 it so it can be used in our app:
 ```bash
-tensorflowjs_converter --input_format=keras ./mobilenet_1_0_224_tf.h5 ./my-model
+tensorflowjs_converter --input_format=keras ./mobilenet-model.h5 ./my-model
 ```
 
 We now have a `model.json` file and multiple sharded binary files located in `./my-model` that we

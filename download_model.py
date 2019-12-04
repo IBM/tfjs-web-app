@@ -1,4 +1,4 @@
-from keras import applications
+from tensorflow.keras import applications
 
 
 model = applications.mobilenet.MobileNet()
