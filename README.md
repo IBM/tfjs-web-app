@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.com/IBM/tfjs-web-app.svg?branch=master)](https://travis-ci.com/IBM/tfjs-web-app)
+
 # Create a progressive web application for offline image classification
 
 After creating deep learning models, users typically want to deploy their trained models to be used
